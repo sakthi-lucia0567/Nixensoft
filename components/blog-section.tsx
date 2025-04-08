@@ -74,6 +74,8 @@ export default function BlogSection() {
               <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
                   src={blogPosts[0].image || "/placeholder.svg"}
+                  width={100}
+                  height={100}
                   alt={blogPosts[0].title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />

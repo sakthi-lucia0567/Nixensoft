@@ -1,6 +1,8 @@
-import { Link, Play } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Twitter, Instagram, Linkedin, Youtube } from "lucide-react"
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Twitter, Instagram, Linkedin, Youtube, Play } from "lucide-react";
+import Link from "next/link";
 
 const footerLinks = {
   company: {
@@ -60,7 +62,7 @@ const footerLinks = {
       { name: "Terms and Conditions", href: "/terms-and-conditions" },
     ],
   },
-}
+};
 
 export default function Footer() {
   return (
@@ -94,13 +96,17 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <Play className="h-8 w-8 text-blue-600 fill-blue-600" />
-              <span className="text-xl font-semibold text-white">Nixensoft</span>
+              <span className="text-xl font-semibold text-white">
+                Nixensoft
+              </span>
             </Link>
             <p className="text-white mb-4">
-              Nixensoft is the leading IT company in Coimbatore, delivering innovative digital solutions with
-              excellence.
+              Nixensoft is the leading IT company in Coimbatore, delivering
+              innovative digital solutions with excellence.
             </p>
-            <Button className="bg-blue-600 hover:bg-blue-700 text-white">Contact us</Button>
+            <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+              Contact us
+            </Button>
           </div>
           {Object.values(footerLinks).map((section) => (
             <div key={section.title}>
@@ -108,7 +114,10 @@ export default function Footer() {
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.name}>
-                    <a href={link.href} className="text-[#C3C1CC] hover:text-blue-600 hover:underline">
+                    <a
+                      href={link.href}
+                      className="text-[#C3C1CC] hover:text-blue-600 hover:underline"
+                    >
                       {link.name}
                     </a>
                   </li>
@@ -119,13 +128,18 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center mt-12 pt-8 border-t border-white">
-          <p className="text-white text-sm">&copy; {new Date().getFullYear()} Nixensoft. All rights reserved.</p>
+          <p className="text-white text-sm">
+            &copy; {new Date().getFullYear()} Nixensoft. All rights reserved.
+          </p>
           <div className="flex items-center gap-4 mt-4 sm:mt-0">
             <a href="#" className="text-white hover:text-blue-600">
               <Twitter className="h-5 w-5" />
               <span className="sr-only">Twitter</span>
             </a>
-            <a href="https://www.instagram.com/nixen_software_tech" className="text-white hover:text-blue-600">
+            <a
+              href="https://www.instagram.com/nixen_software_tech"
+              className="text-white hover:text-blue-600"
+            >
               <Instagram className="h-5 w-5" />
               <span className="sr-only">Instagram</span>
             </a>
@@ -147,6 +161,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }
-

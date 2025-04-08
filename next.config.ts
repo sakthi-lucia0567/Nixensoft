@@ -19,6 +19,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "pagedone.io",
       },
+      // https://t3.ftcdn.net/jpg
+      {
+        protocol: "https",
+        hostname: "t3.ftcdn.net",
+      },
     ],
     formats: ["image/avif", "image/webp"],
   },
@@ -29,7 +34,10 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
-  webpack: (config: any, { dev, isServer }: { dev: boolean; isServer: boolean }) => {
+  webpack: (
+    config: any,
+    { dev, isServer }: { dev: boolean; isServer: boolean }
+  ) => {
     // Optimize CSS
     if (!dev && !isServer) {
       config.optimization.splitChunks.cacheGroups.styles = {
