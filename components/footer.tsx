@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { Twitter, Instagram, Linkedin, Youtube, Play } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const footerLinks = {
   company: {
@@ -95,7 +96,8 @@ export default function Footer() {
         <div className="grid gap-8 lg:grid-cols-8">
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <Play className="h-8 w-8 text-blue-600 fill-blue-600" />
+              {/* <Play className="h-8 w-8 text-blue-600 fill-blue-600" /> */}
+              <Image src="/logo.svg" width={30} height={30} alt="logo" />
               <span className="text-xl font-semibold text-white">
                 Nixensoft
               </span>

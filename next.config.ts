@@ -17,6 +17,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "unsplash.com",
+      },
+      {
+        protocol: "https",
         hostname: "pagedone.io",
       },
       // https://t3.ftcdn.net/jpg
@@ -30,6 +34,7 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: ["lucide-react"],
+    serverExternalPackages: ["mongoose"], // <-- and this
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",

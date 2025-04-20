@@ -1,87 +1,98 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { ArrowLeft, Plus, Trash2, Save } from "lucide-react"
-import { useCMSStore } from "@/lib/cms-store"
-import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { ArrowLeft, Plus, Trash2, Save } from "lucide-react";
+import { useCMSStore } from "@/lib/cms-store";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 export default function HeroSectionEditor() {
-  const router = useRouter()
-  const { heroSection, updateHeroSection } = useCMSStore()
-  const [formData, setFormData] = useState(heroSection)
-  const [companyType, setCompanyType] = useState("")
-  const [statValue, setStatValue] = useState("")
-  const [statLabel, setStatLabel] = useState("")
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter();
+  const { heroSection, updateHeroSection } = useCMSStore();
+  const [formData, setFormData] = useState(heroSection);
+  const [companyType, setCompanyType] = useState("");
+  const [statValue, setStatValue] = useState("");
+  const [statLabel, setStatLabel] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    setFormData(heroSection)
-  }, [heroSection])
+    setFormData(heroSection);
+  }, [heroSection]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleAddCompanyType = () => {
     if (companyType.trim()) {
       setFormData((prev) => ({
         ...prev,
-        companyTypes: [...prev.companyTypes, companyType.trim()],
-      }))
-      setCompanyType("")
+        // companyTypes: [...prev.companyTypes, companyType.trim()],
+      }));
+      setCompanyType("");
     }
-  }
+  };
 
   const handleRemoveCompanyType = (index: number) => {
     setFormData((prev) => ({
       ...prev,
-      companyTypes: prev.companyTypes.filter((_, i) => i !== index),
-    }))
-  }
+      // companyTypes: prev.companyTypes.filter((_, i) => i !== index),
+    }));
+  };
 
   const handleAddStat = () => {
     if (statValue.trim() && statLabel.trim()) {
       setFormData((prev) => ({
         ...prev,
-        stats: [...prev.stats, { value: statValue.trim(), label: statLabel.trim() }],
-      }))
-      setStatValue("")
-      setStatLabel("")
+        stats: [
+          // ...prev.stats,
+          { value: statValue.trim(), label: statLabel.trim() },
+        ],
+      }));
+      setStatValue("");
+      setStatLabel("");
     }
-  }
+  };
 
   const handleRemoveStat = (index: number) => {
     setFormData((prev) => ({
       ...prev,
-      stats: prev.stats.filter((_, i) => i !== index),
-    }))
-  }
+      // stats: prev.stats.filter((_, i) => i !== index),
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      updateHeroSection(formData)
-      alert("Hero section updated successfully!")
-      router.push("/admin/content")
+      updateHeroSection(formData);
+      alert("Hero section updated successfully!");
+      router.push("/admin/content");
     } catch (error) {
-      console.error("Error updating hero section:", error)
-      alert("Failed to update hero section. Please try again.")
+      console.error("Error updating hero section:", error);
+      alert("Failed to update hero section. Please try again.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -95,7 +106,11 @@ export default function HeroSectionEditor() {
           <h1 className="text-3xl font-bold">Edit Hero Section</h1>
         </div>
 
-        <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700" disabled={isSubmitting}>
+        <Button
+          onClick={handleSubmit}
+          className="bg-blue-600 hover:bg-blue-700"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               <span className="animate-spin mr-2">⏳</span> Saving...
@@ -112,14 +127,17 @@ export default function HeroSectionEditor() {
         <CardHeader>
           <CardTitle>Hero Content</CardTitle>
           <CardDescription>
-            Edit the main headline, description, and call-to-action for your homepage hero section.
+            Edit the main headline, description, and call-to-action for your
+            homepage hero section.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-6">
             <div className="space-y-2">
               <Label htmlFor="title">Title</Label>
-              <p className="text-sm text-gray-500">Use {"{type}"} as a placeholder for the rotating company types.</p>
+              <p className="text-sm text-gray-500">
+                Use {"{type}"} as a placeholder for the rotating company types.
+              </p>
               <Input
                 id="title"
                 name="title"
@@ -144,8 +162,11 @@ export default function HeroSectionEditor() {
             <div className="space-y-2">
               <Label>Company Types (Rotating Text)</Label>
               <div className="flex flex-wrap gap-2 mb-2">
-                {formData.companyTypes.map((type, index) => (
-                  <div key={index} className="flex items-center bg-gray-100 rounded-full px-3 py-1">
+                {/* {formData.companyTypes.map((type, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center bg-gray-100 rounded-full px-3 py-1"
+                  >
                     <span className="text-sm">{type}</span>
                     <button
                       type="button"
@@ -155,7 +176,7 @@ export default function HeroSectionEditor() {
                       <Trash2 className="h-3 w-3" />
                     </button>
                   </div>
-                ))}
+                ))} */}
               </div>
               <div className="flex gap-2">
                 <Input
@@ -174,8 +195,11 @@ export default function HeroSectionEditor() {
             <div className="space-y-2">
               <Label>Statistics</Label>
               <div className="space-y-4 mb-4">
-                {formData.stats.map((stat, index) => (
-                  <div key={index} className="flex items-center gap-2 bg-gray-50 p-2 rounded">
+                {/* {formData.stats.map((stat, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 bg-gray-50 p-2 rounded"
+                  >
                     <div className="flex-grow">
                       <div className="font-medium">{stat.value}</div>
                       <div className="text-sm text-gray-500">{stat.label}</div>
@@ -190,17 +214,26 @@ export default function HeroSectionEditor() {
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>
-                ))}
+                ))} */}
               </div>
               <div className="grid grid-cols-2 gap-2 mb-2">
-                <Input value={statValue} onChange={(e) => setStatValue(e.target.value)} placeholder="Value (e.g. 3+)" />
+                <Input
+                  value={statValue}
+                  onChange={(e) => setStatValue(e.target.value)}
+                  placeholder="Value (e.g. 3+)"
+                />
                 <Input
                   value={statLabel}
                   onChange={(e) => setStatLabel(e.target.value)}
                   placeholder="Label (e.g. Years Experience)"
                 />
               </div>
-              <Button type="button" onClick={handleAddStat} variant="outline" size="sm">
+              <Button
+                type="button"
+                onClick={handleAddStat}
+                variant="outline"
+                size="sm"
+              >
                 <Plus className="h-4 w-4 mr-2" /> Add Statistic
               </Button>
             </div>
@@ -213,7 +246,7 @@ export default function HeroSectionEditor() {
                 <Input
                   id="ctaText"
                   name="ctaText"
-                  value={formData.ctaText}
+                  // value={formData.ctaText}
                   onChange={handleInputChange}
                   placeholder="Start a Project"
                 />
@@ -224,7 +257,7 @@ export default function HeroSectionEditor() {
                 <Input
                   id="ctaLink"
                   name="ctaLink"
-                  value={formData.ctaLink}
+                  // value={formData.ctaLink}
                   onChange={handleInputChange}
                   placeholder="/contact"
                 />
@@ -239,7 +272,7 @@ export default function HeroSectionEditor() {
                 <Input
                   id="formTitle"
                   name="formTitle"
-                  value={formData.formTitle}
+                  // value={formData.formTitle}
                   onChange={handleInputChange}
                   placeholder="Contact Us"
                 />
@@ -250,7 +283,7 @@ export default function HeroSectionEditor() {
                 <Input
                   id="formSubtitle"
                   name="formSubtitle"
-                  value={formData.formSubtitle}
+                  // value={formData.formSubtitle}
                   onChange={handleInputChange}
                   placeholder="Fill out the form below to get started"
                 />
@@ -263,31 +296,37 @@ export default function HeroSectionEditor() {
       <Card>
         <CardHeader>
           <CardTitle>Preview</CardTitle>
-          <CardDescription>This is how your hero section will appear on the homepage.</CardDescription>
+          <CardDescription>
+            This is how your hero section will appear on the homepage.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="bg-gray-100 p-6 rounded-lg">
             <div className="max-w-3xl">
               <h1 className="text-3xl font-bold mb-4">
-                {formData.title.replace("{type}", formData.companyTypes[0] || "Digital Marketing Company")}
+                {/* {formData.title.replace(
+                  "{type}",
+                  formData.companyTypes[0] || "Digital Marketing Company"
+                )} */}
               </h1>
               <p className="text-gray-700 mb-6">{formData.description}</p>
               <div className="mb-6">
-                <Button className="bg-blue-600 hover:bg-blue-700">{formData.ctaText}</Button>
+                <Button className="bg-blue-600 hover:bg-blue-700">
+                  {/* {formData.ctaText} */}
+                </Button>
               </div>
               <div className="grid grid-cols-3 gap-4">
-                {formData.stats.map((stat, index) => (
+                {/* {formData.stats.map((stat, index) => (
                   <div key={index}>
                     <div className="text-2xl font-bold">{stat.value}</div>
                     <div className="text-sm text-gray-500">{stat.label}</div>
                   </div>
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-

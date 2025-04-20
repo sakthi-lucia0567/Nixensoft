@@ -1,110 +1,115 @@
-import { create } from "zustand"
-import { persist } from "zustand/middleware"
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 // Define types for our CMS data
 export type ServiceItem = {
-  name: string
-  href: string
-}
+  name: string;
+  href: string;
+};
 
 export type Service = {
-  title: string
-  icon: string
-  items: ServiceItem[]
-  bgColor: string
-  hoverColor: string
-  activeColor: string
-}
+  _id: string;
+  title: string;
+  icon: string;
+  items: ServiceItem[];
+  bgColor: string;
+  hoverColor: string;
+  activeColor: string;
+};
 
 export type Company = {
-  name: string
-  logo: string
-}
+  name: string;
+  logo: string;
+};
 
 export type CTALink = {
-  text: string
-  href: string
-}
+  text: string;
+  href: string;
+};
 
 export type CompaniesSection = {
-  title: string
-  description: string
-  ctaLinks: CTALink[]
-  companies: Company[]
-}
+  title: string;
+  description: string;
+  ctaLinks: CTALink[];
+  companies: Company[];
+};
 
 export type InnovationSection = {
-  title: string
-  description: string
-  ctaText: string
-  ctaLink: string
-  content: string[]
-}
+  title: string;
+  description: string;
+  ctaText: string;
+  ctaLink: string;
+  content: string[];
+};
 
 export type ProcessStep = {
-  title: string
-  icon: string
-  description: string
-}
+  title: string;
+  icon: string;
+  description: string;
+};
 
 export type CTASection = {
-  title: string
-  description: string
-  buttonText: string
+  title: string;
+  description: string;
+  buttonText: string;
   backgroundGradient: {
-    from: string
-    to: string
-  }
-}
+    from: string;
+    to: string;
+  };
+};
 
 export type FAQ = {
-  question: string
-  answer: string
-}
+  _id: string;
+  question: string;
+  answer: string;
+};
 
 export type Testimonial = {
-  id: string
-  rating: number
-  content: string
-  author: string
-  role: string
-  avatar: string
-}
+  id: string;
+  rating: number;
+  content: string;
+  author: string;
+  role: string;
+  avatar: string;
+};
 
 export type HeroSection = {
-  title: string
-  subtitle: string
-  description: string
-  primaryButtonText: string
-  secondaryButtonText: string
-  image: string
-}
+  title: string;
+  subtitle: string;
+  description: string;
+  primaryButtonText: string;
+  secondaryButtonText: string;
+  image: string;
+};
 
 export type CMSStore = {
   // Homepage sections
-  heroSection: HeroSection
-  services: Service[]
-  companiesSection: CompaniesSection
-  innovationSection: InnovationSection
-  processSteps: ProcessStep[]
-  ctaSection: CTASection
-  faqs: FAQ[]
-  testimonials: Testimonial[]
+  heroSection: HeroSection;
+  services: Service[];
+  companiesSection: CompaniesSection;
+  innovationSection: InnovationSection;
+  processSteps: ProcessStep[];
+  ctaSection: CTASection;
+  faqs: FAQ[];
+  testimonials: Testimonial[];
 
   // Methods
-  updateHeroSection: (heroSection: Partial<HeroSection>) => void
-  updateServices: (services: Service[]) => void
-  updateCompaniesSection: (companiesSection: Partial<CompaniesSection>) => void
-  updateInnovationSection: (innovationSection: Partial<InnovationSection>) => void
-  updateProcessSteps: (processSteps: ProcessStep[]) => void
-  updateCTASection: (ctaSection: Partial<CTASection>) => void
-  updateFAQs: (faqs: FAQ[]) => void
-  updateTestimonials: (testimonials: Testimonial[]) => void
-}
+  updateHeroSection: (heroSection: Partial<HeroSection>) => void;
+  updateServices: (services: Service[]) => void;
+  updateCompaniesSection: (companiesSection: Partial<CompaniesSection>) => void;
+  updateInnovationSection: (
+    innovationSection: Partial<InnovationSection>
+  ) => void;
+  updateProcessSteps: (processSteps: ProcessStep[]) => void;
+  updateCTASection: (ctaSection: Partial<CTASection>) => void;
+  updateFAQs: (faqs: FAQ[]) => void;
+  updateTestimonials: (testimonials: Testimonial[]) => void;
+};
 
 // Default data
 const defaultServices: Service[] = [
   {
+    _id: "kcjnxkjnxjkcn",
     title: "Design",
     icon: "Pencil",
     items: [
@@ -117,6 +122,7 @@ const defaultServices: Service[] = [
     activeColor: "text-blue-800",
   },
   {
+    _id: "kjankna",
     title: "Development",
     icon: "Code",
     items: [
@@ -131,6 +137,7 @@ const defaultServices: Service[] = [
     activeColor: "text-purple-800",
   },
   {
+    _id: "jkscnsjknsjk",
     title: "Digital Marketing",
     icon: "Briefcase",
     items: [
@@ -144,7 +151,7 @@ const defaultServices: Service[] = [
     hoverColor: "text-teal-600",
     activeColor: "text-teal-800",
   },
-]
+];
 
 // Create the store
 export const useCMSStore = create<CMSStore>()(
@@ -162,7 +169,8 @@ export const useCMSStore = create<CMSStore>()(
       },
       services: defaultServices,
       companiesSection: {
-        title: "How Do Big Names Stay on Top? They Speak Their Truth to the World.",
+        title:
+          "How Do Big Names Stay on Top? They Speak Their Truth to the World.",
         description:
           "Big brands stay on top by being honest and connecting with their audience through smart marketing.",
         ctaLinks: [
@@ -170,8 +178,14 @@ export const useCMSStore = create<CMSStore>()(
           { text: "Start a Project", href: "#" },
         ],
         companies: [
-          { name: "Airbnb", logo: "https://cdn.brandfetch.io/idkuvXnjOH/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" },
-          { name: "Google", logo: "https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" },
+          {
+            name: "Airbnb",
+            logo: "https://cdn.brandfetch.io/idkuvXnjOH/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B",
+          },
+          {
+            name: "Google",
+            logo: "https://cdn.brandfetch.io/id6O2oGzv-/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B",
+          },
           {
             name: "Microsoft",
             logo: "https://cdn.brandfetch.io/idchmboHEZ/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B",
@@ -180,9 +194,18 @@ export const useCMSStore = create<CMSStore>()(
             name: "Spotify",
             logo: "https://cdn.brandfetch.io/id20mQyGeY/w/2048/h/561/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B",
           },
-          { name: "Amazon", logo: "https://cdn.brandfetch.io/idawOgYOsG/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" },
-          { name: "Apple", logo: "https://cdn.brandfetch.io/idnrCPuv87/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" },
-          { name: "Slack", logo: "https://cdn.brandfetch.io/idJ_HhtG0Z/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B" },
+          {
+            name: "Amazon",
+            logo: "https://cdn.brandfetch.io/idawOgYOsG/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B",
+          },
+          {
+            name: "Apple",
+            logo: "https://cdn.brandfetch.io/idnrCPuv87/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B",
+          },
+          {
+            name: "Slack",
+            logo: "https://cdn.brandfetch.io/idJ_HhtG0Z/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B",
+          },
           {
             name: "Salesforce",
             logo: "https://cdn.brandfetch.io/idVE84WdIN/theme/dark/logo.svg?c=1dxbfHSJFAPEGdCLU4o5B",
@@ -190,7 +213,8 @@ export const useCMSStore = create<CMSStore>()(
         ],
       },
       innovationSection: {
-        title: "Why We are the Best Digital Marketing Company in Coimbatore to take care of your business?",
+        title:
+          "Why We are the Best Digital Marketing Company in Coimbatore to take care of your business?",
         description:
           "NixenSoft is a digital marketing Agency in Coimbatore we focuses on getting results for your business.",
         ctaText: "Grow Your Business With Us",
@@ -210,7 +234,8 @@ export const useCMSStore = create<CMSStore>()(
         {
           title: "Market Research and Competitor Analysis",
           icon: "Search",
-          description: "We conduct thorough market research and competitor analysis to find opportunities.",
+          description:
+            "We conduct thorough market research and competitor analysis to find opportunities.",
         },
         {
           title: "Strategy Development",
@@ -227,12 +252,14 @@ export const useCMSStore = create<CMSStore>()(
         {
           title: "Monitoring and Optimization",
           icon: "BarChart2",
-          description: "We continuously monitor campaigns with advanced analytics, adjusting strategies in real-time.",
+          description:
+            "We continuously monitor campaigns with advanced analytics, adjusting strategies in real-time.",
         },
         {
           title: "Reporting and Feedback",
           icon: "FileText",
-          description: "We provide detailed reports that highlight successes and areas for improvement.",
+          description:
+            "We provide detailed reports that highlight successes and areas for improvement.",
         },
       ],
       ctaSection: {
@@ -247,27 +274,34 @@ export const useCMSStore = create<CMSStore>()(
       },
       faqs: [
         {
+          _id: "sdjhgduyg",
           question: "How will digital marketing improve my business?",
           answer:
             "Digital marketing boosts your business by increasing online visibility, attracting customers, and driving sales. It helps you reach your target audience and measure your results.",
         },
         {
+          _id: "hsjhschc",
           question: "How do you determine the best strategy for my business?",
           answer:
             "We analyze your goals, audience, and market trends to create a tailored strategy that aligns with your objectives and achieves the best results.",
         },
         {
+          _id: "sdjkhgyidg",
           question: "How do you track the performance of my campaigns?",
           answer:
             "We use tools and analytics to track key metrics like website traffic and conversion rates, providing regular reports on your campaign performance.",
         },
         {
-          question: "How involved do I need to be in the digital marketing process?",
+          _id: "djkhgugs",
+          question:
+            "How involved do I need to be in the digital marketing process?",
           answer:
             "While we handle most of the work, your feedback and approval on key aspects are crucial to ensure the strategy aligns with your vision and goals.",
         },
         {
-          question: "What should I expect in terms of communication and reporting?",
+          _id: "sdjhsdyi",
+          question:
+            "What should I expect in terms of communication and reporting?",
           answer:
             "We provide regular updates and detailed reports, ensuring transparent communication and timely insights into your campaign's progress.",
         },
@@ -280,7 +314,8 @@ export const useCMSStore = create<CMSStore>()(
             "Nixensoft transformed our online presence with their expert SEO strategies. Within months, our website ranked on the first page of Google, driving more traffic and increasing our leads.",
           author: "Arunkumar",
           role: "CEO",
-          avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW9tI9dJLB3cigw20KzwBnsFKnQe48OG6ofw&s",
+          avatar:
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRW9tI9dJLB3cigw20KzwBnsFKnQe48OG6ofw&s",
         },
         {
           id: "2",
@@ -315,7 +350,10 @@ export const useCMSStore = create<CMSStore>()(
         })),
       updateInnovationSection: (innovationSection) =>
         set((state) => ({
-          innovationSection: { ...state.innovationSection, ...innovationSection },
+          innovationSection: {
+            ...state.innovationSection,
+            ...innovationSection,
+          },
         })),
       updateProcessSteps: (processSteps) => set({ processSteps }),
       updateCTASection: (ctaSection) =>
@@ -327,7 +365,6 @@ export const useCMSStore = create<CMSStore>()(
     }),
     {
       name: "cms-storage",
-    },
-  ),
-)
-
+    }
+  )
+);

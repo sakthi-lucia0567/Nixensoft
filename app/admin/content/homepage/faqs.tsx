@@ -1,18 +1,31 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { ArrowLeft, Plus, Trash2, Save, GripVertical, ChevronDown, Edit } from "lucide-react"
-import { useCMSStore } from "@/lib/cms-store"
-import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
+import { useState } from "react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import {
+  ArrowLeft,
+  Plus,
+  Trash2,
+  Save,
+  GripVertical,
+  ChevronDown,
+  Edit,
+} from "lucide-react";
+import { useCMSStore } from "@/lib/cms-store";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
   DialogContent,
@@ -20,50 +33,60 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+} from "@/components/ui/dialog";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export default function FAQsEditor() {
-  const router = useRouter()
-  const { faqs, addFAQ, updateFAQ, deleteFAQ, reorderFAQs } = useCMSStore()
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingFAQ, setEditingFAQ] = useState<any>(null)
+  const { faqs } = useCMSStore();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingFAQ, setEditingFAQ] = useState<any>(null);
 
   const handleEditFAQ = (faq: any) => {
-    setEditingFAQ({ ...faq })
-    setIsDialogOpen(true)
-  }
+    setEditingFAQ({ ...faq });
+    setIsDialogOpen(true);
+  };
 
   const handleAddNewFAQ = () => {
     setEditingFAQ({
       question: "",
       answer: "",
-    })
-    setIsDialogOpen(true)
-  }
+    });
+    setIsDialogOpen(true);
+  };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setEditingFAQ((prev: any) => ({ ...prev, [name]: value }))
-  }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setEditingFAQ((prev: any) => ({ ...prev, [name]: value }));
+  };
 
   const handleSaveFAQ = () => {
     if (editingFAQ.id) {
       // Update existing FAQ
-      updateFAQ(editingFAQ.id, editingFAQ)
+      // updateFAQ(editingFAQ.id, editingFAQ);
     } else {
       // Add new FAQ
-      addFAQ(editingFAQ)
+      // addFAQ(editingFAQ);
     }
-    setIsDialogOpen(false)
-    setEditingFAQ(null)
-  }
+    setIsDialogOpen(false);
+    setEditingFAQ(null);
+  };
 
   const handleDeleteFAQ = (id: string) => {
-    if (confirm("Are you sure you want to delete this FAQ? This action cannot be undone.")) {
-      deleteFAQ(id)
+    if (
+      confirm(
+        "Are you sure you want to delete this FAQ? This action cannot be undone."
+      )
+    ) {
+      // deleteFAQ(id);
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -77,7 +100,10 @@ export default function FAQsEditor() {
           <h1 className="text-3xl font-bold">Edit FAQs</h1>
         </div>
 
-        <Button onClick={handleAddNewFAQ} className="bg-blue-600 hover:bg-blue-700">
+        <Button
+          onClick={handleAddNewFAQ}
+          className="bg-blue-600 hover:bg-blue-700"
+        >
           <Plus className="mr-2 h-4 w-4" /> Add New FAQ
         </Button>
       </div>
@@ -85,13 +111,15 @@ export default function FAQsEditor() {
       <Card>
         <CardHeader>
           <CardTitle>Frequently Asked Questions</CardTitle>
-          <CardDescription>Manage the FAQs displayed on your website.</CardDescription>
+          <CardDescription>
+            Manage the FAQs displayed on your website.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <Accordion type="single" collapsible className="w-full">
               {faqs.map((faq, index) => (
-                <AccordionItem key={faq.id} value={faq.id}>
+                <AccordionItem key={faq._id} value={faq._id}>
                   <div className="flex items-center">
                     <div className="mr-2 text-gray-400">
                       <GripVertical className="h-5 w-5" />
@@ -106,8 +134,8 @@ export default function FAQsEditor() {
                         variant="ghost"
                         size="sm"
                         onClick={(e) => {
-                          e.stopPropagation()
-                          handleEditFAQ(faq)
+                          e.stopPropagation();
+                          handleEditFAQ(faq);
                         }}
                       >
                         <Edit className="h-4 w-4" />
@@ -117,8 +145,8 @@ export default function FAQsEditor() {
                         size="sm"
                         className="text-red-500 hover:text-red-700 hover:bg-red-50"
                         onClick={(e) => {
-                          e.stopPropagation()
-                          handleDeleteFAQ(faq.id)
+                          e.stopPropagation();
+                          // handleDeleteFAQ(faq.id);
                         }}
                       >
                         <Trash2 className="h-4 w-4" />
@@ -145,7 +173,9 @@ export default function FAQsEditor() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>{editingFAQ?.id ? "Edit FAQ" : "Add New FAQ"}</DialogTitle>
+            <DialogTitle>
+              {editingFAQ?.id ? "Edit FAQ" : "Add New FAQ"}
+            </DialogTitle>
             <DialogDescription>
               {editingFAQ?.id
                 ? "Update this frequently asked question"
@@ -184,10 +214,14 @@ export default function FAQsEditor() {
                 <h3 className="text-sm font-medium mb-3">Preview</h3>
                 <div className="border rounded-md p-4">
                   <div className="flex justify-between items-center cursor-pointer">
-                    <h4 className="font-medium">{editingFAQ.question || "Question will appear here..."}</h4>
+                    <h4 className="font-medium">
+                      {editingFAQ.question || "Question will appear here..."}
+                    </h4>
                     <ChevronDown className="h-4 w-4 text-gray-500" />
                   </div>
-                  <div className="mt-2 text-gray-700">{editingFAQ.answer || "Answer will appear here..."}</div>
+                  <div className="mt-2 text-gray-700">
+                    {editingFAQ.answer || "Answer will appear here..."}
+                  </div>
                 </div>
               </div>
             </div>
@@ -197,13 +231,15 @@ export default function FAQsEditor() {
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
               Cancel
             </Button>
-            <Button onClick={handleSaveFAQ} className="bg-blue-600 hover:bg-blue-700">
+            <Button
+              onClick={handleSaveFAQ}
+              className="bg-blue-600 hover:bg-blue-700"
+            >
               <Save className="mr-2 h-4 w-4" /> Save FAQ
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
-

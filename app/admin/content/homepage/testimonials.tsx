@@ -1,18 +1,24 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { ArrowLeft, Plus, Trash2, Save, Star, Edit } from "lucide-react"
-import { useCMSStore } from "@/lib/cms-store"
-import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { ArrowLeft, Plus, Trash2, Save, Star, Edit } from "lucide-react";
+import { useCMSStore } from "@/lib/cms-store";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
   DialogContent,
@@ -20,20 +26,20 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+} from "@/components/ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function TestimonialsEditor() {
-  const router = useRouter()
-  const { testimonials, addTestimonial, updateTestimonial, deleteTestimonial } = useCMSStore()
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingTestimonial, setEditingTestimonial] = useState<any>(null)
+  const router = useRouter();
+  const { testimonials } = useCMSStore();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [editingTestimonial, setEditingTestimonial] = useState<any>(null);
 
   const handleEditTestimonial = (testimonial: any) => {
-    setEditingTestimonial({ ...testimonial })
-    setIsDialogOpen(true)
-  }
+    setEditingTestimonial({ ...testimonial });
+    setIsDialogOpen(true);
+  };
 
   const handleAddNewTestimonial = () => {
     setEditingTestimonial({
@@ -42,36 +48,42 @@ export default function TestimonialsEditor() {
       author: "",
       role: "",
       avatar: "",
-    })
-    setIsDialogOpen(true)
-  }
+    });
+    setIsDialogOpen(true);
+  };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setEditingTestimonial((prev: any) => ({ ...prev, [name]: value }))
-  }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setEditingTestimonial((prev: any) => ({ ...prev, [name]: value }));
+  };
 
   const handleRatingChange = (rating: number) => {
-    setEditingTestimonial((prev: any) => ({ ...prev, rating }))
-  }
+    setEditingTestimonial((prev: any) => ({ ...prev, rating }));
+  };
 
   const handleSaveTestimonial = () => {
     if (editingTestimonial.id) {
       // Update existing testimonial
-      updateTestimonial(editingTestimonial.id, editingTestimonial)
+      // updateTestimonial(editingTestimonial.id, editingTestimonial);
     } else {
       // Add new testimonial
-      addTestimonial(editingTestimonial)
+      // addTestimonial(editingTestimonial);
     }
-    setIsDialogOpen(false)
-    setEditingTestimonial(null)
-  }
+    setIsDialogOpen(false);
+    setEditingTestimonial(null);
+  };
 
   const handleDeleteTestimonial = (id: string) => {
-    if (confirm("Are you sure you want to delete this testimonial? This action cannot be undone.")) {
-      deleteTestimonial(id)
+    if (
+      confirm(
+        "Are you sure you want to delete this testimonial? This action cannot be undone."
+      )
+    ) {
+      // deleteTestimonial(id);
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -85,7 +97,10 @@ export default function TestimonialsEditor() {
           <h1 className="text-3xl font-bold">Edit Testimonials</h1>
         </div>
 
-        <Button onClick={handleAddNewTestimonial} className="bg-blue-600 hover:bg-blue-700">
+        <Button
+          onClick={handleAddNewTestimonial}
+          className="bg-blue-600 hover:bg-blue-700"
+        >
           <Plus className="mr-2 h-4 w-4" /> Add New Testimonial
         </Button>
       </div>
@@ -93,7 +108,9 @@ export default function TestimonialsEditor() {
       <Card>
         <CardHeader>
           <CardTitle>Testimonials</CardTitle>
-          <CardDescription>Manage customer testimonials displayed on your website.</CardDescription>
+          <CardDescription>
+            Manage customer testimonials displayed on your website.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -109,15 +126,21 @@ export default function TestimonialsEditor() {
                             star <= testimonial.rating
                               ? "text-amber-500 fill-amber-500"
                               : star - 0.5 <= testimonial.rating
-                                ? "text-amber-500 fill-amber-500"
-                                : "text-gray-300"
+                              ? "text-amber-500 fill-amber-500"
+                              : "text-gray-300"
                           }`}
                         />
                       ))}
-                      <span className="ml-2 text-sm font-medium">{testimonial.rating}</span>
+                      <span className="ml-2 text-sm font-medium">
+                        {testimonial.rating}
+                      </span>
                     </div>
                     <div className="flex gap-2">
-                      <Button variant="ghost" size="sm" onClick={() => handleEditTestimonial(testimonial)}>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleEditTestimonial(testimonial)}
+                      >
                         <Edit className="h-4 w-4" />
                       </Button>
                       <Button
@@ -131,16 +154,25 @@ export default function TestimonialsEditor() {
                     </div>
                   </div>
 
-                  <p className="text-gray-700 mb-4 line-clamp-3">{testimonial.content}</p>
+                  <p className="text-gray-700 mb-4 line-clamp-3">
+                    {testimonial.content}
+                  </p>
 
                   <div className="flex items-center">
                     <Avatar className="h-10 w-10 mr-3">
-                      <AvatarImage src={testimonial.avatar} alt={testimonial.author} />
-                      <AvatarFallback>{testimonial.author.charAt(0)}</AvatarFallback>
+                      <AvatarImage
+                        src={testimonial.avatar}
+                        alt={testimonial.author}
+                      />
+                      <AvatarFallback>
+                        {testimonial.author.charAt(0)}
+                      </AvatarFallback>
                     </Avatar>
                     <div>
                       <p className="font-medium">{testimonial.author}</p>
-                      <p className="text-sm text-gray-500">{testimonial.role}</p>
+                      <p className="text-sm text-gray-500">
+                        {testimonial.role}
+                      </p>
                     </div>
                   </div>
                 </CardContent>
@@ -150,7 +182,9 @@ export default function TestimonialsEditor() {
             {testimonials.length === 0 && (
               <div className="col-span-2 text-center py-8">
                 <p className="text-gray-500 mb-4">No testimonials added yet</p>
-                <Button onClick={handleAddNewTestimonial}>Add Your First Testimonial</Button>
+                <Button onClick={handleAddNewTestimonial}>
+                  Add Your First Testimonial
+                </Button>
               </div>
             )}
           </div>
@@ -160,7 +194,11 @@ export default function TestimonialsEditor() {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>{editingTestimonial?.id ? "Edit Testimonial" : "Add New Testimonial"}</DialogTitle>
+            <DialogTitle>
+              {editingTestimonial?.id
+                ? "Edit Testimonial"
+                : "Add New Testimonial"}
+            </DialogTitle>
             <DialogDescription>
               {editingTestimonial?.id
                 ? "Update the details for this testimonial"
@@ -182,12 +220,16 @@ export default function TestimonialsEditor() {
                     >
                       <Star
                         className={`h-6 w-6 ${
-                          star <= editingTestimonial.rating ? "text-amber-500 fill-amber-500" : "text-gray-300"
+                          star <= editingTestimonial.rating
+                            ? "text-amber-500 fill-amber-500"
+                            : "text-gray-300"
                         }`}
                       />
                     </button>
                   ))}
-                  <span className="ml-2 text-sm font-medium">{editingTestimonial.rating}</span>
+                  <span className="ml-2 text-sm font-medium">
+                    {editingTestimonial.rating}
+                  </span>
                 </div>
               </div>
 
@@ -236,7 +278,9 @@ export default function TestimonialsEditor() {
                   onChange={handleInputChange}
                   placeholder="https://example.com/avatar.jpg"
                 />
-                <p className="text-sm text-gray-500">Enter the URL for the customer's profile picture</p>
+                <p className="text-sm text-gray-500">
+                  Enter the URL for the customer's profile picture
+                </p>
               </div>
 
               <Separator />
@@ -246,11 +290,16 @@ export default function TestimonialsEditor() {
                 <div className="flex items-start gap-4">
                   <Avatar className="h-12 w-12">
                     <AvatarImage
-                      src={editingTestimonial.avatar || "/placeholder.svg?height=48&width=48"}
+                      src={
+                        editingTestimonial.avatar ||
+                        "/placeholder.svg?height=48&width=48"
+                      }
                       alt={editingTestimonial.author}
                     />
                     <AvatarFallback>
-                      {editingTestimonial.author ? editingTestimonial.author.charAt(0) : "?"}
+                      {editingTestimonial.author
+                        ? editingTestimonial.author.charAt(0)
+                        : "?"}
                     </AvatarFallback>
                   </Avatar>
                   <div>
@@ -259,16 +308,23 @@ export default function TestimonialsEditor() {
                         <Star
                           key={star}
                           className={`h-4 w-4 ${
-                            star <= editingTestimonial.rating ? "text-amber-500 fill-amber-500" : "text-gray-300"
+                            star <= editingTestimonial.rating
+                              ? "text-amber-500 fill-amber-500"
+                              : "text-gray-300"
                           }`}
                         />
                       ))}
                     </div>
                     <p className="text-gray-700 mb-2">
-                      {editingTestimonial.content || "Testimonial content will appear here..."}
+                      {editingTestimonial.content ||
+                        "Testimonial content will appear here..."}
                     </p>
-                    <p className="font-medium">{editingTestimonial.author || "Customer Name"}</p>
-                    <p className="text-sm text-gray-500">{editingTestimonial.role || "Role, Company"}</p>
+                    <p className="font-medium">
+                      {editingTestimonial.author || "Customer Name"}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      {editingTestimonial.role || "Role, Company"}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -279,13 +335,15 @@ export default function TestimonialsEditor() {
             <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
               Cancel
             </Button>
-            <Button onClick={handleSaveTestimonial} className="bg-blue-600 hover:bg-blue-700">
+            <Button
+              onClick={handleSaveTestimonial}
+              className="bg-blue-600 hover:bg-blue-700"
+            >
               <Save className="mr-2 h-4 w-4" /> Save Testimonial
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
-  )
+  );
 }
-

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { ArrowRight, TrendingUp } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
+import { motion } from "framer-motion";
+import { ArrowRight, TrendingUp } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Badge } from "@/components/ui/badge";
 
 // Sample data for trending articles
 const trendingArticles = [
@@ -13,7 +13,8 @@ const trendingArticles = [
     title: "The Future of Web Design: AI-Driven Interfaces",
     excerpt:
       "Explore how artificial intelligence is revolutionizing web design with automated layouts, personalized user experiences, and predictive content delivery.",
-    image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&h=500&fit=crop",
     category: "Web Design",
     views: "12.5K",
     slug: "future-web-design-ai-interfaces",
@@ -23,7 +24,8 @@ const trendingArticles = [
     title: "Responsive Design in 2023: Beyond Media Queries",
     excerpt:
       "Discover advanced techniques for creating truly responsive experiences that adapt to any device, screen size, or user preference.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
     category: "Web Development",
     views: "9.8K",
     slug: "responsive-design-beyond-media-queries",
@@ -33,12 +35,13 @@ const trendingArticles = [
     title: "Minimalist Logo Design: Creating Impact with Less",
     excerpt:
       "Learn the principles of minimalist logo design and how simplicity can create memorable, versatile brand identities that stand the test of time.",
-    image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=500&fit=crop",
     category: "Logo Design",
     views: "8.3K",
     slug: "minimalist-logo-design-impact",
   },
-]
+];
 
 export function TrendingArticles() {
   return (
@@ -56,7 +59,7 @@ export function TrendingArticles() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="relative group"
+              // className="relative group"
             >
               <div className="relative h-64 rounded-lg overflow-hidden">
                 <Image
@@ -69,7 +72,9 @@ export function TrendingArticles() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
 
                 <div className="absolute top-4 left-4">
-                  <Badge className="bg-blue-600 hover:bg-blue-700 text-white">{article.category}</Badge>
+                  <Badge className="bg-blue-600 hover:bg-blue-700 text-white">
+                    {article.category}
+                  </Badge>
                 </div>
 
                 <div className="absolute top-4 right-4 bg-black/60 text-white text-xs px-2 py-1 rounded-full flex items-center">
@@ -79,11 +84,16 @@ export function TrendingArticles() {
 
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                   <h3 className="text-xl font-bold mb-2">
-                    <Link href={`/blog/${article.slug}`} className="hover:text-blue-300 transition-colors">
+                    <Link
+                      href={`/blog/${article.slug}`}
+                      className="hover:text-blue-300 transition-colors"
+                    >
                       {article.title}
                     </Link>
                   </h3>
-                  <p className="text-sm text-gray-200 line-clamp-2">{article.excerpt}</p>
+                  <p className="text-sm text-gray-200 line-clamp-2">
+                    {article.excerpt}
+                  </p>
 
                   <Link
                     href={`/blog/${article.slug}`}
@@ -98,6 +108,5 @@ export function TrendingArticles() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import type React from "react";
 import { CookieConsent } from "@/components/cookie-consent";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,35 +24,37 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.className}>
-      <head>
-        <link
-          rel="preconnect"
-          href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com"
-        />
-        <link rel="preconnect" href="https://cdn.brandfetch.io" />
-        <link rel="preconnect" href="https://images.unsplash.com" />
-        <link
-          rel="preload"
-          href="/fonts/inter-var-latin.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `
+    <ClerkProvider>
+      <html lang="en" className={inter.className}>
+        <head>
+          <link
+            rel="preconnect"
+            href="https://hebbkx1anhila5yf.public.blob.vercel-storage.com"
+          />
+          <link rel="preconnect" href="https://cdn.brandfetch.io" />
+          <link rel="preconnect" href="https://images.unsplash.com" />
+          <link
+            rel="preload"
+            href="/fonts/inter-var-latin.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `
             /* Critical CSS */
             body { font-family: 'Inter', sans-serif; }
             .container { width: 100%; max-width: 1280px; margin-left: auto; margin-right: auto; }
           `,
-          }}
-        />
-      </head>
-      <body>
-        {children}
-        <CookieConsent />
-      </body>
-    </html>
+            }}
+          />
+        </head>
+        <body>
+          {children}
+          <CookieConsent />
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

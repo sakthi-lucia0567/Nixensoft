@@ -1,11 +1,9 @@
 "use client";
 
-import type React from "react";
-
 import { useState, useEffect, use } from "react";
 import { useRouter } from "next/navigation";
 import { X, Plus } from "lucide-react";
-import { useJobStore } from "@/lib/job-store";
+import { useCareerStore } from "@/lib/career-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,26 +17,29 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 
+interface EditJobOpeningPageProps {
+  params: Promise<{ id: string }>;
+}
 export default function EditJobOpeningPage({
   params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+}: EditJobOpeningPageProps) {
   const { id } = use(params);
   const router = useRouter();
-  const { getJob, updateJob } = useJobStore();
+  const { updateCareer, getCareerById } = useCareerStore();
 
   const [title, setTitle] = useState("");
   const [type, setType] = useState<
-    "Full-time" | "Part-time" | "Contract" | "Internship" | "Remote"
-  >("Full-time");
+    "full-time" | "part-time" | "contract" | "internship" | "remote"
+  >("full-time");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
   const [requirements, setRequirements] = useState<string[]>([]);
   const [newRequirement, setNewRequirement] = useState("");
   const [isActive, setIsActive] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [errors, setErrors] = useState({
     title: false,
@@ -47,21 +48,29 @@ export default function EditJobOpeningPage({
   });
 
   useEffect(() => {
-    const job = getJob(id);
+    const fetchCareer = async () => {
+      try {
+        const career = await getCareerById(id);
+        if (career) {
+          setTitle(career.title);
+          setType(career.type);
+          setLocation(career.location);
+          setDescription(career.description);
+          setRequirements(career.requirements);
+          setIsActive(career.isActive);
+        } else {
+          router.push("/admin/careers");
+        }
+      } catch (error) {
+        console.error("Failed to fetch career:", error);
+        router.push("/admin/careers");
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-    if (job) {
-      setTitle(job.title);
-      setType(job.type);
-      setLocation(job.location);
-      setDescription(job.description);
-      setRequirements(job.requirements);
-      setIsActive(job.isActive);
-    } else {
-      router.push("/admin/careers");
-    }
-
-    setIsLoading(false);
-  }, [id, getJob, router]);
+    fetchCareer();
+  }, [id, getCareerById, router]);
 
   const handleAddRequirement = () => {
     if (newRequirement.trim()) {
@@ -85,29 +94,71 @@ export default function EditJobOpeningPage({
     return !Object.values(newErrors).some(Boolean);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    updateJob(id, {
-      title,
-      type,
-      location,
-      description,
-      requirements,
-      isActive,
-    });
-
-    router.push("/admin/careers");
+    setIsSubmitting(true);
+    try {
+      await updateCareer(id, {
+        title,
+        type,
+        location,
+        description,
+        requirements,
+        isActive,
+      });
+      router.push("/admin/careers");
+    } catch (error) {
+      console.error("Failed to update career:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center h-96">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900"></div>
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <Skeleton className="h-9 w-[250px]" />
+          <div className="flex gap-2">
+            <Skeleton className="h-10 w-[100px]" />
+            <Skeleton className="h-10 w-[140px]" />
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="space-y-2">
+              <Skeleton className="h-5 w-24" />
+              <Skeleton className="h-10 w-full" />
+            </div>
+          ))}
+        </div>
+
+        <div className="space-y-2">
+          <Skeleton className="h-5 w-36" />
+          <Skeleton className="h-40 w-full" />
+        </div>
+
+        <div className="space-y-2">
+          <Skeleton className="h-5 w-24" />
+          <div className="flex gap-2">
+            <Skeleton className="h-10 flex-1" />
+            <Skeleton className="h-10 w-20" />
+          </div>
+          <div className="space-y-2">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <Skeleton className="h-8 flex-1" />
+                <Skeleton className="h-8 w-8" />
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -120,10 +171,39 @@ export default function EditJobOpeningPage({
           <Button
             variant="outline"
             onClick={() => router.push("/admin/careers")}
+            disabled={isSubmitting}
           >
             Cancel
           </Button>
-          <Button onClick={handleSubmit}>Save Changes</Button>
+          <Button onClick={handleSubmit} disabled={isSubmitting}>
+            {isSubmitting ? (
+              <div className="flex items-center">
+                <svg
+                  className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                Saving...
+              </div>
+            ) : (
+              "Save Changes"
+            )}
+          </Button>
         </div>
       </div>
 
@@ -153,17 +233,17 @@ export default function EditJobOpeningPage({
                 <Label htmlFor="type">Job Type</Label>
                 <Select
                   value={type}
-                  onValueChange={(value) => setType(value as any)}
+                  onValueChange={(value) => setType(value as typeof type)}
                 >
                   <SelectTrigger id="type">
                     <SelectValue placeholder="Select job type" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Full-time">Full-time</SelectItem>
-                    <SelectItem value="Part-time">Part-time</SelectItem>
-                    <SelectItem value="Contract">Contract</SelectItem>
-                    <SelectItem value="Internship">Internship</SelectItem>
-                    <SelectItem value="Remote">Remote</SelectItem>
+                    <SelectItem value="full-time">Full-time</SelectItem>
+                    <SelectItem value="part-time">Part-time</SelectItem>
+                    <SelectItem value="contract">Contract</SelectItem>
+                    <SelectItem value="internship">Internship</SelectItem>
+                    <SelectItem value="remote">Remote</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

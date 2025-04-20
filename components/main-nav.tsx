@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { Play, Menu, X } from "lucide-react"
-import { motion,AnimatePresence } from "motion/react"
+import { useState } from "react";
+import Link from "next/link";
+import { Play, Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,32 +11,40 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import { usePathname } from "next/navigation"
+} from "@/components/ui/navigation-menu";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function MainNav() {
-  const [isOpen, setIsOpen] = useState(false)
-  const pathname = usePathname()
+  const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   if (!pathname) {
-    return null
+    return null;
   }
 
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   return (
     <header className="border-b">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8"
+        aria-label="Global"
+      >
         <div className="flex lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <span className="flex items-center gap-2">
-              <Play className="h-8 w-8 text-blue-600 fill-blue-600" />
+              {/* <Play className="h-8 w-8 text-blue-600 fill-blue-600" /> */}
+              <Image src="/logo.svg" width={30} height={30} alt="logo" />
               <span className="text-xl font-semibold">Nixensoft</span>
             </span>
           </Link>
         </div>
         <div className="flex lg:hidden">
-          <button onClick={toggleMenu} className="text-gray-700 hover:text-gray-900">
+          <button
+            onClick={toggleMenu}
+            className="text-gray-700 hover:text-gray-900"
+          >
             <span className="sr-only">Open main menu</span>
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -66,7 +74,11 @@ export default function MainNav() {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger
-                className={pathname.startsWith("/services") ? "bg-accent text-accent-foreground" : ""}
+                className={
+                  pathname.startsWith("/services")
+                    ? "bg-accent text-accent-foreground"
+                    : ""
+                }
               >
                 Services
               </NavigationMenuTrigger>
@@ -77,7 +89,9 @@ export default function MainNav() {
                       href="/audience"
                       className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                     >
-                      <div className="text-sm font-medium leading-none">Design</div>
+                      <div className="text-sm font-medium leading-none">
+                        Design
+                      </div>
                       <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                         Target and segment your audience effectively
                       </p>
@@ -88,7 +102,9 @@ export default function MainNav() {
                       href="/automation"
                       className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                     >
-                      <div className="text-sm font-medium leading-none">Development</div>
+                      <div className="text-sm font-medium leading-none">
+                        Development
+                      </div>
                       <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                         Automate your marketing workflows
                       </p>
@@ -99,7 +115,9 @@ export default function MainNav() {
                       href="/tools"
                       className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                     >
-                      <div className="text-sm font-medium leading-none">Digital Marketing</div>
+                      <div className="text-sm font-medium leading-none">
+                        Digital Marketing
+                      </div>
                       <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                         Design and create marketing materials
                       </p>
@@ -179,6 +197,5 @@ export default function MainNav() {
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }
-

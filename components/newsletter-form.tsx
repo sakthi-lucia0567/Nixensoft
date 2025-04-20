@@ -25,9 +25,6 @@ export function NewsletterForm({ className }: { className?: string }) {
     setError("");
 
     try {
-      // In a real application, this would be an API call to your newsletter service
-      // For example: await fetch('/api/newsletter', { method: 'POST', body: JSON.stringify({ email }) })
-
       // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 1000));
 

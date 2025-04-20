@@ -1,18 +1,24 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Label } from "@/components/ui/label"
-import { ArrowLeft, Save } from "lucide-react"
-import { useCMSStore } from "@/lib/cms-store"
-import Link from "next/link"
-import { Separator } from "@/components/ui/separator"
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { ArrowLeft, Save } from "lucide-react";
+import { useCMSStore } from "@/lib/cms-store";
+import Link from "next/link";
+import { Separator } from "@/components/ui/separator";
 
 const colorOptions = [
   { name: "Blue", from: "blue-600", to: "blue-700" },
@@ -23,25 +29,27 @@ const colorOptions = [
   { name: "Amber", from: "amber-600", to: "amber-700" },
   { name: "Pink", from: "pink-600", to: "pink-700" },
   { name: "Indigo", from: "indigo-600", to: "indigo-700" },
-]
+];
 
 export default function CTAEditor() {
-  const router = useRouter()
-  const { ctaSection, updateCTASection } = useCMSStore()
-  const [formData, setFormData] = useState(ctaSection)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter();
+  const { ctaSection, updateCTASection } = useCMSStore();
+  const [formData, setFormData] = useState(ctaSection);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
-    setFormData(ctaSection)
-  }, [ctaSection])
+    setFormData(ctaSection);
+  }, [ctaSection]);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleColorSelect = (colorName: string) => {
-    const color = colorOptions.find((c) => c.name === colorName)
+    const color = colorOptions.find((c) => c.name === colorName);
     if (color) {
       setFormData((prev) => ({
         ...prev,
@@ -49,25 +57,25 @@ export default function CTAEditor() {
           from: color.from,
           to: color.to,
         },
-      }))
+      }));
     }
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     try {
-      updateCTASection(formData)
-      alert("CTA section updated successfully!")
-      router.push("/admin/content")
+      updateCTASection(formData);
+      alert("CTA section updated successfully!");
+      router.push("/admin/content");
     } catch (error) {
-      console.error("Error updating CTA section:", error)
-      alert("Failed to update CTA section. Please try again.")
+      console.error("Error updating CTA section:", error);
+      alert("Failed to update CTA section. Please try again.");
     } finally {
-      setIsSubmitting(false)
+      setIsSubmitting(false);
     }
-  }
+  };
 
   return (
     <div className="space-y-6">
@@ -81,7 +89,11 @@ export default function CTAEditor() {
           <h1 className="text-3xl font-bold">Edit CTA Section</h1>
         </div>
 
-        <Button onClick={handleSubmit} className="bg-blue-600 hover:bg-blue-700" disabled={isSubmitting}>
+        <Button
+          onClick={handleSubmit}
+          className="bg-blue-600 hover:bg-blue-700"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? (
             <>
               <span className="animate-spin mr-2">⏳</span> Saving...
@@ -97,7 +109,9 @@ export default function CTAEditor() {
       <Card>
         <CardHeader>
           <CardTitle>Call-to-Action Content</CardTitle>
-          <CardDescription>Edit the content for your call-to-action section.</CardDescription>
+          <CardDescription>
+            Edit the content for your call-to-action section.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form className="space-y-6">
@@ -141,7 +155,7 @@ export default function CTAEditor() {
                 <Input
                   id="buttonLink"
                   name="buttonLink"
-                  value={formData.buttonLink}
+                  // value={formData.buttonLink}
                   onChange={handleInputChange}
                   placeholder="/contact"
                 />
@@ -158,8 +172,12 @@ export default function CTAEditor() {
                     key={color.name}
                     type="button"
                     variant="outline"
-                    className={`h-10 bg-gradient-to-r from-${color.from} to-${color.to} text-white hover:opacity-90 ${
-                      formData.backgroundGradient.from === color.from ? "ring-2 ring-offset-2 ring-blue-500" : ""
+                    className={`h-10 bg-gradient-to-r from-${color.from} to-${
+                      color.to
+                    } text-white hover:opacity-90 ${
+                      formData.backgroundGradient.from === color.from
+                        ? "ring-2 ring-offset-2 ring-blue-500"
+                        : ""
                     }`}
                     onClick={() => handleColorSelect(color.name)}
                   >
@@ -175,7 +193,9 @@ export default function CTAEditor() {
       <Card>
         <CardHeader>
           <CardTitle>Preview</CardTitle>
-          <CardDescription>This is how your CTA section will appear on the website.</CardDescription>
+          <CardDescription>
+            This is how your CTA section will appear on the website.
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <div
@@ -185,13 +205,14 @@ export default function CTAEditor() {
               <h2 className="text-2xl font-bold">{formData.title}</h2>
               <p>{formData.description}</p>
               <div>
-                <Button className="bg-white text-black hover:bg-gray-100">{formData.buttonText}</Button>
+                <Button className="bg-white text-black hover:bg-gray-100">
+                  {formData.buttonText}
+                </Button>
               </div>
             </div>
           </div>
         </CardContent>
       </Card>
     </div>
-  )
+  );
 }
-

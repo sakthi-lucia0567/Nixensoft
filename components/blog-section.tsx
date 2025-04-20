@@ -7,8 +7,7 @@ const blogPosts = [
     title: "SEO Basics: Beginner's Guide to SEO Success",
     description:
       "Over the past year, Volosoft has undergone many changes! After months of preparation and some hard work, we moved to our new office.",
-    image:
-      "https://t3.ftcdn.net/jpg/06/36/77/04/360_F_636770460_Yx21AgodrKZWWpVNTmGb2WL5yP15xcvf.jpg",
+    image: "https://unsplash.com/photos/google-sign-fpZZEV0uQwA",
     featured: true,
   },
   {
@@ -71,7 +70,7 @@ export default function BlogSection() {
             className="lg:row-span-2"
           >
             <a href="#" className="group block space-y-4">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
+              {/* <div className="relative aspect-[4/3] overflow-hidden rounded-lg">
                 <Image
                   src={blogPosts[0].image || "/placeholder.svg"}
                   width={100}
@@ -79,7 +78,7 @@ export default function BlogSection() {
                   alt={blogPosts[0].title}
                   className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
-              </div>
+              </div> */}
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold group-hover:text-blue-600">
                   {blogPosts[0].title}

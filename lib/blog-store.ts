@@ -171,6 +171,7 @@ export interface BlogInput {
   metaDescription?: string;
   keywords?: string;
   slug?: string;
+  author?: string;
   categories?: string[];
   tags?: string[];
   status?: "draft" | "published" | "scheduled";

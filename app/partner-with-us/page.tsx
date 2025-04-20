@@ -1,27 +1,27 @@
-import type { Metadata } from "next"
-import MainNav from "@/components/main-nav"
-import Footer from "@/components/footer"
-import { Breadcrumbs } from "@/components/breadcrumbs"
-import AnnouncementBanner from "@/components/announcement-banner"
-import { Seo } from "@/components/seo"
-import { SchemaMarkup } from "@/components/schema-markup"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Handshake, Users, TrendingUp, Globe, CheckCircle } from "lucide-react"
+import type { Metadata } from "next";
+import MainNav from "@/components/main-nav";
+import Footer from "@/components/footer";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import AnnouncementBanner from "@/components/announcement-banner";
+import { Seo } from "@/components/seo";
+import { SchemaMarkup } from "@/components/schema-markup";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Handshake, Users, TrendingUp, Globe, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Partner With Us | Nixensoft - Digital Marketing Agency",
   description:
     "Join forces with Nixensoft to create powerful digital marketing partnerships. Explore our partnership opportunities and grow your business with us.",
-}
+};
 
 export default function PartnerWithUsPage() {
   return (
     <>
       <Seo
-        title="Partner With Us | Nixensoft - Digital Marketing Agency"
+        pageName="Partner With Us | Nixensoft - Digital Marketing Agency"
         description="Join forces with Nixensoft to create powerful digital marketing partnerships. Explore our partnership opportunities and grow your business with us."
         canonical="https://www.nixensoft.com/partner-with-us"
         ogTitle="Partner With Us - Nixensoft Digital Marketing Agency"
@@ -44,16 +44,18 @@ export default function PartnerWithUsPage() {
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative container mx-auto px-4 py-20 md:py-28">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Partner With Us</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Partner With Us
+            </h1>
             <p className="text-xl opacity-90 mb-8">
-              Join forces with Nixensoft to create powerful partnerships that drive growth and innovation.
+              Join forces with Nixensoft to create powerful partnerships that
+              drive growth and innovation.
             </p>
             <Breadcrumbs
               items={[
                 { label: "Home", href: "/" },
                 { label: "Partner With Us", href: "/partner-with-us" },
               ]}
-              className="text-white/70"
             />
           </div>
         </div>
@@ -65,8 +67,8 @@ export default function PartnerWithUsPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl font-bold mb-4">Why Partner With Us</h2>
             <p className="text-lg text-gray-700">
-              Discover the benefits of forming a strategic partnership with Nixensoft, a leading digital marketing
-              agency.
+              Discover the benefits of forming a strategic partnership with
+              Nixensoft, a leading digital marketing agency.
             </p>
           </div>
 
@@ -77,7 +79,8 @@ export default function PartnerWithUsPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Accelerated Growth</h3>
               <p className="text-gray-700">
-                Leverage our expertise and resources to accelerate your business growth and reach new markets faster.
+                Leverage our expertise and resources to accelerate your business
+                growth and reach new markets faster.
               </p>
             </div>
 
@@ -87,8 +90,8 @@ export default function PartnerWithUsPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Expanded Network</h3>
               <p className="text-gray-700">
-                Gain access to our extensive network of clients, partners, and industry connections to expand your
-                reach.
+                Gain access to our extensive network of clients, partners, and
+                industry connections to expand your reach.
               </p>
             </div>
 
@@ -98,8 +101,8 @@ export default function PartnerWithUsPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Mutual Success</h3>
               <p className="text-gray-700">
-                Our partnership model is built on mutual success, ensuring that both parties benefit from the
-                collaboration.
+                Our partnership model is built on mutual success, ensuring that
+                both parties benefit from the collaboration.
               </p>
             </div>
 
@@ -109,7 +112,8 @@ export default function PartnerWithUsPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Global Reach</h3>
               <p className="text-gray-700">
-                Extend your reach to international markets with our global digital marketing expertise and connections.
+                Extend your reach to international markets with our global
+                digital marketing expertise and connections.
               </p>
             </div>
 
@@ -119,7 +123,8 @@ export default function PartnerWithUsPage() {
               </div>
               <h3 className="text-xl font-semibold mb-3">Quality Assurance</h3>
               <p className="text-gray-700">
-                Partner with an agency known for its commitment to quality and excellence in digital marketing services.
+                Partner with an agency known for its commitment to quality and
+                excellence in digital marketing services.
               </p>
             </div>
 
@@ -127,9 +132,12 @@ export default function PartnerWithUsPage() {
               <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
                 <TrendingUp className="h-8 w-8 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Innovative Solutions</h3>
+              <h3 className="text-xl font-semibold mb-3">
+                Innovative Solutions
+              </h3>
               <p className="text-gray-700">
-                Access cutting-edge digital marketing technologies and innovative solutions through our partnership.
+                Access cutting-edge digital marketing technologies and
+                innovative solutions through our partnership.
               </p>
             </div>
           </div>
@@ -142,16 +150,19 @@ export default function PartnerWithUsPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl font-bold mb-4">Partnership Models</h2>
             <p className="text-lg text-gray-700">
-              We offer flexible partnership models tailored to your business needs and goals.
+              We offer flexible partnership models tailored to your business
+              needs and goals.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             <div className="bg-white p-8 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-3 text-blue-600">Referral Partnership</h3>
+              <h3 className="text-xl font-semibold mb-3 text-blue-600">
+                Referral Partnership
+              </h3>
               <p className="text-gray-700 mb-4">
-                Earn commissions by referring clients to our digital marketing services. A simple way to add value to
-                your network.
+                Earn commissions by referring clients to our digital marketing
+                services. A simple way to add value to your network.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-start">
@@ -173,10 +184,13 @@ export default function PartnerWithUsPage() {
               <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">
                 POPULAR
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-blue-600">Reseller Partnership</h3>
+              <h3 className="text-xl font-semibold mb-3 text-blue-600">
+                Reseller Partnership
+              </h3>
               <p className="text-gray-700 mb-4">
-                White-label our services and offer them to your clients under your brand. Perfect for agencies looking
-                to expand their service offerings.
+                White-label our services and offer them to your clients under
+                your brand. Perfect for agencies looking to expand their service
+                offerings.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-start">
@@ -199,10 +213,12 @@ export default function PartnerWithUsPage() {
             </div>
 
             <div className="bg-white p-8 rounded-lg shadow-md border border-gray-100 hover:shadow-lg transition-shadow">
-              <h3 className="text-xl font-semibold mb-3 text-blue-600">Strategic Alliance</h3>
+              <h3 className="text-xl font-semibold mb-3 text-blue-600">
+                Strategic Alliance
+              </h3>
               <p className="text-gray-700 mb-4">
-                Form a strategic alliance to collaborate on projects, share resources, and create integrated service
-                offerings.
+                Form a strategic alliance to collaborate on projects, share
+                resources, and create integrated service offerings.
               </p>
               <ul className="space-y-2">
                 <li className="flex items-start">
@@ -234,12 +250,12 @@ export default function PartnerWithUsPage() {
             <div>
               <h2 className="text-3xl font-bold mb-6">Become a Partner</h2>
               <p className="text-lg text-gray-700 mb-6">
-                Ready to explore a partnership with Nixensoft? Fill out the form to get started on your partnership
-                journey.
+                Ready to explore a partnership with Nixensoft? Fill out the form
+                to get started on your partnership journey.
               </p>
               <p className="text-lg text-gray-700 mb-6">
-                Our partnership team will review your application and contact you within 48 hours to discuss the next
-                steps.
+                Our partnership team will review your application and contact
+                you within 48 hours to discuss the next steps.
               </p>
               <div className="space-y-6">
                 <div className="flex items-start">
@@ -247,8 +263,13 @@ export default function PartnerWithUsPage() {
                     <CheckCircle className="h-5 w-5 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-semibold mb-1">Simple Application Process</h4>
-                    <p className="text-gray-700">Quick and straightforward application with minimal paperwork.</p>
+                    <h4 className="font-semibold mb-1">
+                      Simple Application Process
+                    </h4>
+                    <p className="text-gray-700">
+                      Quick and straightforward application with minimal
+                      paperwork.
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -257,7 +278,10 @@ export default function PartnerWithUsPage() {
                   </div>
                   <div>
                     <h4 className="font-semibold mb-1">Fast Approval</h4>
-                    <p className="text-gray-700">Get approved and start your partnership in as little as 48 hours.</p>
+                    <p className="text-gray-700">
+                      Get approved and start your partnership in as little as 48
+                      hours.
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start">
@@ -267,7 +291,8 @@ export default function PartnerWithUsPage() {
                   <div>
                     <h4 className="font-semibold mb-1">Dedicated Support</h4>
                     <p className="text-gray-700">
-                      Receive dedicated support from our partnership team throughout the process.
+                      Receive dedicated support from our partnership team
+                      throughout the process.
                     </p>
                   </div>
                 </div>
@@ -276,7 +301,9 @@ export default function PartnerWithUsPage() {
             <div>
               <Card className="w-full max-w-md mx-auto">
                 <CardHeader>
-                  <h3 className="text-2xl font-semibold text-center">Partner Application</h3>
+                  <h3 className="text-2xl font-semibold text-center">
+                    Partner Application
+                  </h3>
                 </CardHeader>
                 <CardContent>
                   <form className="space-y-4">
@@ -311,7 +338,10 @@ export default function PartnerWithUsPage() {
                       <Input id="website" type="url" />
                     </div>
                     <div>
-                      <label htmlFor="partnership" className="text-sm font-medium">
+                      <label
+                        htmlFor="partnership"
+                        className="text-sm font-medium"
+                      >
                         Partnership Type
                       </label>
                       <select
@@ -329,9 +359,16 @@ export default function PartnerWithUsPage() {
                       <label htmlFor="message" className="text-sm font-medium">
                         Tell us about your business and partnership goals
                       </label>
-                      <Textarea id="message" className="min-h-[100px]" required />
+                      <Textarea
+                        id="message"
+                        className="min-h-[100px]"
+                        required
+                      />
                     </div>
-                    <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                    <Button
+                      type="submit"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    >
                       Submit Application
                     </Button>
                   </form>
@@ -348,7 +385,8 @@ export default function PartnerWithUsPage() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl font-bold mb-4">Partner Success Stories</h2>
             <p className="text-lg text-gray-700">
-              Hear from our existing partners about their experience working with Nixensoft.
+              Hear from our existing partners about their experience working
+              with Nixensoft.
             </p>
           </div>
 
@@ -385,10 +423,12 @@ export default function PartnerWithUsPage() {
                   />
                   <div>
                     <h4 className="font-semibold">{testimonial.name}</h4>
-                    <p className="text-gray-600 text-sm">{testimonial.company}</p>
+                    <p className="text-gray-600 text-sm">
+                      {testimonial.company}
+                    </p>
                   </div>
                 </div>
-                <p className="text-gray-700 italic">"{testimonial.quote}"</p>
+                <p className="text-gray-700 italic">{testimonial.quote}</p>
               </div>
             ))}
           </div>
@@ -397,6 +437,5 @@ export default function PartnerWithUsPage() {
 
       <Footer />
     </>
-  )
+  );
 }
-

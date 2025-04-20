@@ -10,6 +10,8 @@ interface SchemaMarkupProps {
     | "WebPage"
     | "BlogPosting"
     | "Article"
+    | "Blog"
+    | "AboutPage"
     | "Service";
   data?: Record<string, any>;
 }

@@ -1,19 +1,41 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Switch } from "@/components/ui/switch"
-import { Textarea } from "@/components/ui/textarea"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
-import { Settings, User, Bell, Shield, Globe, Mail, Key, Save, Trash2 } from "lucide-react"
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
+import {
+  Settings,
+  User,
+  Bell,
+  Shield,
+  Globe,
+  Mail,
+  Key,
+  Save,
+  Trash2,
+} from "lucide-react";
 
 export default function SettingsPage() {
-  const [activeTab, setActiveTab] = useState("general")
+  const [activeTab, setActiveTab] = useState("general");
   const [formState, setFormState] = useState({
     siteName: "Nixensoft",
     siteDescription: "Digital Marketing Agency in Coimbatore",
@@ -32,7 +54,8 @@ export default function SettingsPage() {
       defaultTitle: "Nixensoft - Digital Marketing Agency in Coimbatore",
       defaultDescription:
         "Nixensoft is a leading digital marketing agency in Coimbatore offering SEO, social media, and web design services.",
-      defaultKeywords: "digital marketing, SEO, social media, web design, Coimbatore",
+      defaultKeywords:
+        "digital marketing, SEO, social media, web design, Coimbatore",
       googleAnalyticsId: "UA-XXXXXXXXX-X",
       googleTagManagerId: "GTM-XXXXXXX",
     },
@@ -63,62 +86,69 @@ export default function SettingsPage() {
       bio: "Digital marketing professional with over 5 years of experience.",
       avatar: "",
     },
-  })
+  });
 
-  const handleInputChange = (section, field, value) => {
-    if (section) {
-      setFormState({
-        ...formState,
-        [section]: {
-          ...formState[section],
-          [field]: value,
-        },
-      })
-    } else {
-      setFormState({
-        ...formState,
-        [field]: value,
-      })
-    }
-  }
+  // const handleInputChange = (section, field, value) => {
+  //   if (section) {
+  //     setFormState({
+  //       ...formState,
+  //       [section]: {
+  //         ...formState[section],
+  //         [field]: value,
+  //       },
+  //     });
+  //   } else {
+  //     setFormState({
+  //       ...formState,
+  //       [field]: value,
+  //     });
+  //   }
+  // };
 
-  const handleSocialInputChange = (platform, value) => {
-    setFormState({
-      ...formState,
-      socialLinks: {
-        ...formState.socialLinks,
-        [platform]: value,
-      },
-    })
-  }
+  // const handleSocialInputChange = (platform, value) => {
+  //   setFormState({
+  //     ...formState,
+  //     socialLinks: {
+  //       ...formState.socialLinks,
+  //       [platform]: value,
+  //     },
+  //   });
+  // };
 
-  const handleSwitchChange = (section, field, checked) => {
-    setFormState({
-      ...formState,
-      [section]: {
-        ...formState[section],
-        [field]: checked,
-      },
-    })
-  }
+  // const handleSwitchChange = (section, field, checked) => {
+  //   setFormState({
+  //     ...formState,
+  //     [section]: {
+  //       ...formState[section],
+  //       [field]: checked,
+  //     },
+  //   });
+  // };
 
   const handleSaveSettings = () => {
     // In a real application, this would save to a database or API
-    console.log("Saving settings:", formState)
-    alert("Settings saved successfully!")
-  }
+    console.log("Saving settings:", formState);
+    alert("Settings saved successfully!");
+  };
 
   return (
     <div className="p-6">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold">Settings</h1>
-        <Button onClick={handleSaveSettings} className="bg-blue-600 hover:bg-blue-700">
+        <Button
+          onClick={handleSaveSettings}
+          className="bg-blue-600 hover:bg-blue-700"
+        >
           <Save className="mr-2 h-4 w-4" />
           Save All Settings
         </Button>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
+      <Tabs
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="space-y-4"
+      >
         <TabsList className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
           <TabsTrigger value="general" className="flex items-center">
             <Settings className="mr-2 h-4 w-4" />
@@ -155,7 +185,9 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>General Settings</CardTitle>
-              <CardDescription>Manage your website's general information and appearance.</CardDescription>
+              <CardDescription>
+                Manage your website's general information and appearance.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -164,7 +196,9 @@ export default function SettingsPage() {
                   <Input
                     id="siteName"
                     value={formState.siteName}
-                    onChange={(e) => handleInputChange(null, "siteName", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(null, "siteName", e.target.value)
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -172,7 +206,9 @@ export default function SettingsPage() {
                   <Input
                     id="siteDescription"
                     value={formState.siteDescription}
-                    onChange={(e) => handleInputChange(null, "siteDescription", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(null, "siteDescription", e.target.value)
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -181,7 +217,9 @@ export default function SettingsPage() {
                     id="email"
                     type="email"
                     value={formState.email}
-                    onChange={(e) => handleInputChange(null, "email", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(null, "email", e.target.value)
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -189,7 +227,9 @@ export default function SettingsPage() {
                   <Input
                     id="phone"
                     value={formState.phone}
-                    onChange={(e) => handleInputChange(null, "phone", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(null, "phone", e.target.value)
+                    // }
                   />
                 </div>
                 <div className="space-y-2 md:col-span-2">
@@ -197,7 +237,9 @@ export default function SettingsPage() {
                   <Textarea
                     id="address"
                     value={formState.address}
-                    onChange={(e) => handleInputChange(null, "address", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(null, "address", e.target.value)
+                    // }
                   />
                 </div>
               </div>
@@ -250,7 +292,9 @@ export default function SettingsPage() {
                     <Input
                       id="facebook"
                       value={formState.socialLinks.facebook}
-                      onChange={(e) => handleSocialInputChange("facebook", e.target.value)}
+                      // onChange={(e) =>
+                      //   handleSocialInputChange("facebook", e.target.value)
+                      // }
                     />
                   </div>
                   <div className="space-y-2">
@@ -258,7 +302,9 @@ export default function SettingsPage() {
                     <Input
                       id="twitter"
                       value={formState.socialLinks.twitter}
-                      onChange={(e) => handleSocialInputChange("twitter", e.target.value)}
+                      // onChange={(e) =>
+                      //   handleSocialInputChange("twitter", e.target.value)
+                      // }
                     />
                   </div>
                   <div className="space-y-2">
@@ -266,7 +312,9 @@ export default function SettingsPage() {
                     <Input
                       id="instagram"
                       value={formState.socialLinks.instagram}
-                      onChange={(e) => handleSocialInputChange("instagram", e.target.value)}
+                      // onChange={(e) =>
+                      //   handleSocialInputChange("instagram", e.target.value)
+                      // }
                     />
                   </div>
                   <div className="space-y-2">
@@ -274,7 +322,9 @@ export default function SettingsPage() {
                     <Input
                       id="linkedin"
                       value={formState.socialLinks.linkedin}
-                      onChange={(e) => handleSocialInputChange("linkedin", e.target.value)}
+                      // onChange={(e) =>
+                      //   handleSocialInputChange("linkedin", e.target.value)
+                      // }
                     />
                   </div>
                 </div>
@@ -288,7 +338,7 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>SEO Settings</CardTitle>
-              <CardDescription>Configure your website's search engine optimization settings.</CardDescription>
+              <CardDescription>{`Configure your website's search engine optimization settings.`}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 gap-6">
@@ -297,15 +347,29 @@ export default function SettingsPage() {
                   <Input
                     id="defaultTitle"
                     value={formState.seoSettings.defaultTitle}
-                    onChange={(e) => handleInputChange("seoSettings", "defaultTitle", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "seoSettings",
+                    //     "defaultTitle",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="defaultDescription">Default Meta Description</Label>
+                  <Label htmlFor="defaultDescription">
+                    Default Meta Description
+                  </Label>
                   <Textarea
                     id="defaultDescription"
                     value={formState.seoSettings.defaultDescription}
-                    onChange={(e) => handleInputChange("seoSettings", "defaultDescription", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "seoSettings",
+                    //     "defaultDescription",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -313,7 +377,13 @@ export default function SettingsPage() {
                   <Textarea
                     id="defaultKeywords"
                     value={formState.seoSettings.defaultKeywords}
-                    onChange={(e) => handleInputChange("seoSettings", "defaultKeywords", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "seoSettings",
+                    //     "defaultKeywords",
+                    //     e.target.value
+                    //   )
+                    // }
                     placeholder="Comma separated keywords"
                   />
                 </div>
@@ -322,16 +392,30 @@ export default function SettingsPage() {
                   <Input
                     id="googleAnalyticsId"
                     value={formState.seoSettings.googleAnalyticsId}
-                    onChange={(e) => handleInputChange("seoSettings", "googleAnalyticsId", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "seoSettings",
+                    //     "googleAnalyticsId",
+                    //     e.target.value
+                    //   )
+                    // }
                     placeholder="UA-XXXXXXXXX-X"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="googleTagManagerId">Google Tag Manager ID</Label>
+                  <Label htmlFor="googleTagManagerId">
+                    Google Tag Manager ID
+                  </Label>
                   <Input
                     id="googleTagManagerId"
                     value={formState.seoSettings.googleTagManagerId}
-                    onChange={(e) => handleInputChange("seoSettings", "googleTagManagerId", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "seoSettings",
+                    //     "googleTagManagerId",
+                    //     e.target.value
+                    //   )
+                    // }
                     placeholder="GTM-XXXXXXX"
                   />
                 </div>
@@ -346,7 +430,8 @@ export default function SettingsPage() {
             <CardHeader>
               <CardTitle>Email Settings</CardTitle>
               <CardDescription>
-                Configure your email server settings for sending notifications and newsletters.
+                Configure your email server settings for sending notifications
+                and newsletters.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
@@ -356,7 +441,13 @@ export default function SettingsPage() {
                   <Input
                     id="smtpServer"
                     value={formState.emailSettings.smtpServer}
-                    onChange={(e) => handleInputChange("emailSettings", "smtpServer", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "emailSettings",
+                    //     "smtpServer",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -364,7 +455,13 @@ export default function SettingsPage() {
                   <Input
                     id="smtpPort"
                     value={formState.emailSettings.smtpPort}
-                    onChange={(e) => handleInputChange("emailSettings", "smtpPort", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "emailSettings",
+                    //     "smtpPort",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -372,7 +469,13 @@ export default function SettingsPage() {
                   <Input
                     id="smtpUsername"
                     value={formState.emailSettings.smtpUsername}
-                    onChange={(e) => handleInputChange("emailSettings", "smtpUsername", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "emailSettings",
+                    //     "smtpUsername",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -381,7 +484,13 @@ export default function SettingsPage() {
                     id="smtpPassword"
                     type="password"
                     value={formState.emailSettings.smtpPassword}
-                    onChange={(e) => handleInputChange("emailSettings", "smtpPassword", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "emailSettings",
+                    //     "smtpPassword",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -390,7 +499,13 @@ export default function SettingsPage() {
                     id="fromEmail"
                     type="email"
                     value={formState.emailSettings.fromEmail}
-                    onChange={(e) => handleInputChange("emailSettings", "fromEmail", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "emailSettings",
+                    //     "fromEmail",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -398,7 +513,13 @@ export default function SettingsPage() {
                   <Input
                     id="fromName"
                     value={formState.emailSettings.fromName}
-                    onChange={(e) => handleInputChange("emailSettings", "fromName", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "emailSettings",
+                    //     "fromName",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
                 </div>
               </div>
@@ -414,53 +535,82 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Notification Settings</CardTitle>
-              <CardDescription>Configure when and how you receive notifications.</CardDescription>
+              <CardDescription>
+                Configure when and how you receive notifications.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label htmlFor="newLeadNotification">New Lead Notifications</Label>
-                    <p className="text-sm text-muted-foreground">Receive notifications when a new lead is submitted.</p>
+                    <Label htmlFor="newLeadNotification">
+                      New Lead Notifications
+                    </Label>
+                    <p className="text-sm text-muted-foreground">
+                      Receive notifications when a new lead is submitted.
+                    </p>
                   </div>
                   <Switch
                     id="newLeadNotification"
                     checked={formState.notificationSettings.newLeadNotification}
-                    onCheckedChange={(checked) =>
-                      handleSwitchChange("notificationSettings", "newLeadNotification", checked)
-                    }
+                    // onCheckedChange={(checked) =>
+                    //   handleSwitchChange(
+                    //     "notificationSettings",
+                    //     "newLeadNotification",
+                    //     checked
+                    //   )
+                    // }
                   />
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label htmlFor="newCommentNotification">New Comment Notifications</Label>
+                    <Label htmlFor="newCommentNotification">
+                      New Comment Notifications
+                    </Label>
                     <p className="text-sm text-muted-foreground">
-                      Receive notifications when a new comment is posted on your blog.
+                      Receive notifications when a new comment is posted on your
+                      blog.
                     </p>
                   </div>
                   <Switch
                     id="newCommentNotification"
-                    checked={formState.notificationSettings.newCommentNotification}
-                    onCheckedChange={(checked) =>
-                      handleSwitchChange("notificationSettings", "newCommentNotification", checked)
+                    checked={
+                      formState.notificationSettings.newCommentNotification
                     }
+                    // onCheckedChange={(checked) =>
+                    //   handleSwitchChange(
+                    //     "notificationSettings",
+                    //     "newCommentNotification",
+                    //     checked
+                    //   )
+                    // }
                   />
                 </div>
                 <Separator />
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label htmlFor="newsletterSignupNotification">Newsletter Signup Notifications</Label>
+                    <Label htmlFor="newsletterSignupNotification">
+                      Newsletter Signup Notifications
+                    </Label>
                     <p className="text-sm text-muted-foreground">
-                      Receive notifications when someone subscribes to your newsletter.
+                      Receive notifications when someone subscribes to your
+                      newsletter.
                     </p>
                   </div>
                   <Switch
                     id="newsletterSignupNotification"
-                    checked={formState.notificationSettings.newsletterSignupNotification}
-                    onCheckedChange={(checked) =>
-                      handleSwitchChange("notificationSettings", "newsletterSignupNotification", checked)
+                    checked={
+                      formState.notificationSettings
+                        .newsletterSignupNotification
                     }
+                    // onCheckedChange={(checked) =>
+                    //   handleSwitchChange(
+                    //     "notificationSettings",
+                    //     "newsletterSignupNotification",
+                    //     checked
+                    //   )
+                    // }
                   />
                 </div>
                 <Separator />
@@ -474,9 +624,13 @@ export default function SettingsPage() {
                   <Switch
                     id="marketingEmails"
                     checked={formState.notificationSettings.marketingEmails}
-                    onCheckedChange={(checked) =>
-                      handleSwitchChange("notificationSettings", "marketingEmails", checked)
-                    }
+                    // onCheckedChange={(checked) =>
+                    //   handleSwitchChange(
+                    //     "notificationSettings",
+                    //     "marketingEmails",
+                    //     checked
+                    //   )
+                    // }
                   />
                 </div>
               </div>
@@ -489,19 +643,31 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>Security Settings</CardTitle>
-              <CardDescription>Configure security settings to protect your account and website.</CardDescription>
+              <CardDescription>
+                Configure security settings to protect your account and website.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="space-y-0.5">
-                    <Label htmlFor="twoFactorAuth">Two-Factor Authentication</Label>
-                    <p className="text-sm text-muted-foreground">Add an extra layer of security to your account.</p>
+                    <Label htmlFor="twoFactorAuth">
+                      Two-Factor Authentication
+                    </Label>
+                    <p className="text-sm text-muted-foreground">
+                      Add an extra layer of security to your account.
+                    </p>
                   </div>
                   <Switch
                     id="twoFactorAuth"
                     checked={formState.securitySettings.twoFactorAuth}
-                    onCheckedChange={(checked) => handleSwitchChange("securitySettings", "twoFactorAuth", checked)}
+                    // onCheckedChange={(checked) =>
+                    //   handleSwitchChange(
+                    //     "securitySettings",
+                    //     "twoFactorAuth",
+                    //     checked
+                    //   )
+                    // }
                   />
                 </div>
                 <Separator />
@@ -511,9 +677,17 @@ export default function SettingsPage() {
                     id="passwordExpiry"
                     type="number"
                     value={formState.securitySettings.passwordExpiry}
-                    onChange={(e) => handleInputChange("securitySettings", "passwordExpiry", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "securitySettings",
+                    //     "passwordExpiry",
+                    //     e.target.value
+                    //   )
+                    // }
                   />
-                  <p className="text-sm text-muted-foreground">Set to 0 for no expiry.</p>
+                  <p className="text-sm text-muted-foreground">
+                    Set to 0 for no expiry.
+                  </p>
                 </div>
                 <Separator />
                 <div className="space-y-2">
@@ -522,21 +696,38 @@ export default function SettingsPage() {
                     <Switch
                       id="ipRestriction"
                       checked={formState.securitySettings.ipRestriction}
-                      onCheckedChange={(checked) => handleSwitchChange("securitySettings", "ipRestriction", checked)}
+                      // onCheckedChange={(checked) =>
+                      //   handleSwitchChange(
+                      //     "securitySettings",
+                      //     "ipRestriction",
+                      //     checked
+                      //   )
+                      // }
                     />
                   </div>
                   <Textarea
                     id="allowedIps"
                     value={formState.securitySettings.allowedIps}
-                    onChange={(e) => handleInputChange("securitySettings", "allowedIps", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange(
+                    //     "securitySettings",
+                    //     "allowedIps",
+                    //     e.target.value
+                    //   )
+                    // }
                     placeholder="Enter allowed IP addresses, one per line"
                     disabled={!formState.securitySettings.ipRestriction}
                   />
-                  <p className="text-sm text-muted-foreground">Restrict admin access to specific IP addresses.</p>
+                  <p className="text-sm text-muted-foreground">
+                    Restrict admin access to specific IP addresses.
+                  </p>
                 </div>
               </div>
               <div className="pt-4">
-                <Button variant="outline" className="text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600">
+                <Button
+                  variant="outline"
+                  className="text-red-500 border-red-200 hover:bg-red-50 hover:text-red-600"
+                >
                   <Trash2 className="mr-2 h-4 w-4" />
                   Reset All Security Settings
                 </Button>
@@ -550,7 +741,9 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>User Profile</CardTitle>
-              <CardDescription>Manage your personal information and account settings.</CardDescription>
+              <CardDescription>
+                Manage your personal information and account settings.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -559,7 +752,9 @@ export default function SettingsPage() {
                   <Input
                     id="userName"
                     value={formState.userSettings.name}
-                    onChange={(e) => handleInputChange("userSettings", "name", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange("userSettings", "name", e.target.value)
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
@@ -568,20 +763,26 @@ export default function SettingsPage() {
                     id="userEmail"
                     type="email"
                     value={formState.userSettings.email}
-                    onChange={(e) => handleInputChange("userSettings", "email", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange("userSettings", "email", e.target.value)
+                    // }
                   />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="userRole">Role</Label>
                   <Select
                     value={formState.userSettings.role}
-                    onValueChange={(value) => handleInputChange("userSettings", "role", value)}
+                    // onValueChange={(value) =>
+                    //   handleInputChange("userSettings", "role", value)
+                    // }
                   >
                     <SelectTrigger id="userRole">
                       <SelectValue placeholder="Select a role" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="administrator">Administrator</SelectItem>
+                      <SelectItem value="administrator">
+                        Administrator
+                      </SelectItem>
                       <SelectItem value="editor">Editor</SelectItem>
                       <SelectItem value="author">Author</SelectItem>
                       <SelectItem value="contributor">Contributor</SelectItem>
@@ -593,7 +794,9 @@ export default function SettingsPage() {
                   <Textarea
                     id="userBio"
                     value={formState.userSettings.bio}
-                    onChange={(e) => handleInputChange("userSettings", "bio", e.target.value)}
+                    // onChange={(e) =>
+                    //   handleInputChange("userSettings", "bio", e.target.value)
+                    // }
                   />
                 </div>
                 <div className="space-y-2 md:col-span-2">
@@ -602,7 +805,9 @@ export default function SettingsPage() {
                     {formState.userSettings.avatar ? (
                       <div className="w-16 h-16 rounded-full overflow-hidden">
                         <img
-                          src={formState.userSettings.avatar || "/placeholder.svg"}
+                          src={
+                            formState.userSettings.avatar || "/placeholder.svg"
+                          }
                           alt="Avatar"
                           className="w-full h-full object-cover"
                         />
@@ -629,7 +834,9 @@ export default function SettingsPage() {
                     <Input id="newPassword" type="password" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                    <Label htmlFor="confirmPassword">
+                      Confirm New Password
+                    </Label>
                     <Input id="confirmPassword" type="password" />
                   </div>
                   <div className="flex items-end">
@@ -646,7 +853,9 @@ export default function SettingsPage() {
           <Card>
             <CardHeader>
               <CardTitle>API Keys</CardTitle>
-              <CardDescription>Manage API keys for integrating with third-party services.</CardDescription>
+              <CardDescription>
+                Manage API keys for integrating with third-party services.
+              </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
@@ -659,7 +868,11 @@ export default function SettingsPage() {
                       </Button>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Input type="password" value="AIzaSyD2jLTxZk9JJYoP6JI-..." readOnly />
+                      <Input
+                        type="password"
+                        value="AIzaSyD2jLTxZk9JJYoP6JI-..."
+                        readOnly
+                      />
                       <Button variant="ghost" size="icon">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -673,12 +886,21 @@ export default function SettingsPage() {
                           strokeLinejoin="round"
                           className="h-4 w-4"
                         >
-                          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                          <rect
+                            width="14"
+                            height="14"
+                            x="8"
+                            y="8"
+                            rx="2"
+                            ry="2"
+                          />
                           <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
                         </svg>
                       </Button>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-2">Used for displaying maps on the contact page.</p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Used for displaying maps on the contact page.
+                    </p>
                   </div>
 
                   <div className="p-4 border rounded-md">
@@ -689,7 +911,11 @@ export default function SettingsPage() {
                       </Button>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Input type="password" value="9a8b7c6d5e4f3g2h1i0j..." readOnly />
+                      <Input
+                        type="password"
+                        value="9a8b7c6d5e4f3g2h1i0j..."
+                        readOnly
+                      />
                       <Button variant="ghost" size="icon">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -703,12 +929,21 @@ export default function SettingsPage() {
                           strokeLinejoin="round"
                           className="h-4 w-4"
                         >
-                          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                          <rect
+                            width="14"
+                            height="14"
+                            x="8"
+                            y="8"
+                            rx="2"
+                            ry="2"
+                          />
                           <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
                         </svg>
                       </Button>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-2">Used for newsletter subscriptions.</p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Used for newsletter subscriptions.
+                    </p>
                   </div>
 
                   <div className="p-4 border rounded-md">
@@ -719,7 +954,11 @@ export default function SettingsPage() {
                       </Button>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Input type="password" value="6LdXXXXXXXXXXXXXXXXXXXX" readOnly />
+                      <Input
+                        type="password"
+                        value="6LdXXXXXXXXXXXXXXXXXXXX"
+                        readOnly
+                      />
                       <Button variant="ghost" size="icon">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -733,12 +972,21 @@ export default function SettingsPage() {
                           strokeLinejoin="round"
                           className="h-4 w-4"
                         >
-                          <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                          <rect
+                            width="14"
+                            height="14"
+                            x="8"
+                            y="8"
+                            rx="2"
+                            ry="2"
+                          />
                           <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
                         </svg>
                       </Button>
                     </div>
-                    <p className="text-sm text-muted-foreground mt-2">Used for form spam protection.</p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Used for form spam protection.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -750,6 +998,5 @@ export default function SettingsPage() {
         </TabsContent>
       </Tabs>
     </div>
-  )
+  );
 }
-

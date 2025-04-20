@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   Briefcase,
@@ -14,7 +14,7 @@ import {
   ArrowUpDown,
 } from "lucide-react";
 import { format } from "date-fns";
-import { useJobStore } from "@/lib/job-store";
+import { useCareerStore } from "@/lib/career-store";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
@@ -40,9 +40,11 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CareersAdminPage() {
-  const { jobs, deleteJob, toggleJobStatus } = useJobStore();
+  const { career, fetchCareers, deleteCareer, toggleCareerStatus } =
+    useCareerStore();
   const router = useRouter();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -52,26 +54,38 @@ export default function CareersAdminPage() {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [jobToDelete, setJobToDelete] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCareers = async () => {
+      try {
+        await fetchCareers();
+      } catch (error) {
+        console.error("Failed to fetch careers:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadCareers();
+  }, [fetchCareers]);
 
   // Filter and sort jobs
-  const filteredJobs = jobs
-    .filter((job) => {
-      // Search filter
+  const filteredJobs = career
+    .filter((career) => {
+      if (!career) return false;
       const matchesSearch =
-        job.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        job.location.toLowerCase().includes(searchTerm.toLowerCase());
+        career.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        career.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        career.location.toLowerCase().includes(searchTerm.toLowerCase());
 
-      // Status filter
       const matchesStatus =
         statusFilter === "all" ||
-        (statusFilter === "active" && job.isActive) ||
-        (statusFilter === "inactive" && !job.isActive);
+        (statusFilter === "active" && career.isActive) ||
+        (statusFilter === "inactive" && !career.isActive);
 
-      // Type filter
       const matchesType =
         typeFilter === "all" ||
-        job.type.toLowerCase().includes(typeFilter.toLowerCase());
+        career.type.toLowerCase().includes(typeFilter.toLowerCase());
 
       return matchesSearch && matchesStatus && matchesType;
     })
@@ -89,7 +103,6 @@ export default function CareersAdminPage() {
           ? a.location.localeCompare(b.location)
           : b.location.localeCompare(a.location);
       } else {
-        // Default sort by updatedAt
         return sortDirection === "asc"
           ? new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
           : new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
@@ -110,13 +123,62 @@ export default function CareersAdminPage() {
     setDeleteDialogOpen(true);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (jobToDelete) {
-      deleteJob(jobToDelete);
-      setDeleteDialogOpen(false);
-      setJobToDelete(null);
+      try {
+        await deleteCareer(jobToDelete);
+      } catch (error) {
+        console.error("Failed to delete career:", error);
+      } finally {
+        setDeleteDialogOpen(false);
+        setJobToDelete(null);
+      }
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="space-y-6">
+        <div className="flex justify-between items-center">
+          <Skeleton className="h-9 w-[250px]" />
+          <Skeleton className="h-10 w-[180px]" />
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Skeleton className="h-10 flex-1" />
+          <div className="flex gap-2">
+            <Skeleton className="h-10 w-40" />
+            <Skeleton className="h-10 w-40" />
+          </div>
+        </div>
+
+        <div className="border rounded-md">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {[...Array(6)].map((_, i) => (
+                  <TableHead key={i}>
+                    <Skeleton className="h-6 w-full" />
+                  </TableHead>
+                ))}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {[...Array(5)].map((_, i) => (
+                <TableRow key={i}>
+                  {[...Array(6)].map((_, j) => (
+                    <TableCell key={j}>
+                      <Skeleton className="h-6 w-full" />
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -240,7 +302,7 @@ export default function CareersAdminPage() {
               </TableRow>
             ) : (
               filteredJobs.map((job) => (
-                <TableRow key={job.id}>
+                <TableRow key={job._id}>
                   <TableCell className="font-medium">{job.title}</TableCell>
                   <TableCell>{job.type}</TableCell>
                   <TableCell>{job.location}</TableCell>
@@ -257,7 +319,7 @@ export default function CareersAdminPage() {
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() => toggleJobStatus(job.id)}
+                        onClick={() => toggleCareerStatus(job._id)}
                         title={job.isActive ? "Deactivate" : "Activate"}
                       >
                         {job.isActive ? (
@@ -270,7 +332,7 @@ export default function CareersAdminPage() {
                         variant="outline"
                         size="icon"
                         onClick={() =>
-                          router.push(`/admin/careers/edit/${job.id}`)
+                          router.push(`/admin/careers/edit/${job._id}`)
                         }
                       >
                         <Edit className="h-4 w-4" />
@@ -278,7 +340,7 @@ export default function CareersAdminPage() {
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() => confirmDelete(job.id)}
+                        onClick={() => confirmDelete(job._id)}
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
@@ -310,13 +372,7 @@ export default function CareersAdminPage() {
             >
               Cancel
             </Button>
-            <Button
-              variant="destructive"
-              className="text-white"
-              onClick={handleDelete}
-            >
-              Delete
-            </Button>
+            <Button onClick={handleDelete}>Delete</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
